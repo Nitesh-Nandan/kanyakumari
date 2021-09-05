@@ -1,6 +1,7 @@
 package org.kanyakumari.web.controller;
 
 import lombok.extern.slf4j.Slf4j;
+import org.kanyakumari.web.producer.KafkaProducer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,14 +15,13 @@ import org.springframework.web.bind.annotation.RestController;
 public class UserResource {
 
     @Autowired
-    private KafkaTemplate kafkaTemplate;
-
+    private KafkaProducer producer;
     private static final String TOPIC = "kafka_example";
 
     @GetMapping("/publish/{message}")
     public String post(@PathVariable("message") final String message) {
         log.info("Message: {}", message);
-        kafkaTemplate.send(TOPIC, message);
+        producer.send(TOPIC, message);
         return "Published Successfully";
     }
 
