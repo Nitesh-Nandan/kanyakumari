@@ -46,7 +46,7 @@ public class KafkaProducer {
     public boolean sendWithRetry(String topic, String message) {
         ListenableFuture<SendResult<String, String>>  future = kafkaTemplate.send(topic, message);
         try {
-            SendResult<String, String> res = future.get(1000, TimeUnit.MILLISECONDS);
+           future.get(1000, TimeUnit.MILLISECONDS);
         } catch (Exception ex) {
             log.error("Error occurred {} ", ex);
             throw new RetryException(ex.getMessage());
