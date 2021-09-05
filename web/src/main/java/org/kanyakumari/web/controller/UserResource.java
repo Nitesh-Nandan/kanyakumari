@@ -21,7 +21,12 @@ public class UserResource {
     @GetMapping("/publish/{message}")
     public String post(@PathVariable("message") final String message) {
         log.info("Message: {}", message);
-        producer.send(TOPIC, message);
+//        producer.send(TOPIC, message);
+//        producer.sendSync(TOPIC, message);
+
+        if(!producer.sendWithRetry(TOPIC, message)) {
+            return "Published Failed";
+        }
         return "Published Successfully";
     }
 

@@ -8,6 +8,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.retry.annotation.EnableRetry;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
 import java.util.Arrays;
@@ -21,6 +22,7 @@ import java.util.Arrays;
 @PropertySource("classpath:worker.properties")
 @EnableScheduling
 @Slf4j
+@EnableRetry
 public class AppApplication {
     public static void main(String[] args) {
         SpringApplication.run(AppApplication.class, args);
