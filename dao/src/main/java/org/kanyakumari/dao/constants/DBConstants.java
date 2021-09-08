@@ -1,4 +1,4 @@
-package org.kanyakumari.dao.db1.constants;
+package org.kanyakumari.dao.constants;
 
 import lombok.experimental.UtilityClass;
 
@@ -8,7 +8,7 @@ public class DBConstants {
     @UtilityClass
     public static class MySQLConfig {
 
-        public static final String PERSISTENCE_UNIT = "supplier-referrals-mysqlDB";
+        public static final String PERSISTENCE_UNIT = "local-referrals-mysqlDB";
 
         @UtilityClass
         public static class Beans {
