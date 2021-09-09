@@ -18,18 +18,18 @@ import javax.persistence.Table;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "answer")
-public class Answer {
+@Table(name = "laptop")
+public class Laptop {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "answer")
-    private String answer;
+    @Column(name = "laptop_name")
+    private String laptopName;
 
     // Bi-directional mapping, it says mapped by answer attribute of Question Entity
-    @OneToOne(mappedBy = "answer")
-    private Question question;
+    @OneToOne(mappedBy = "laptop")
+    private Student student;
 
 }

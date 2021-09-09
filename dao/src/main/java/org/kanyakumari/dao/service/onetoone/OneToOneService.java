@@ -1,10 +1,10 @@
 package org.kanyakumari.dao.service.onetoone;
 
 import lombok.extern.slf4j.Slf4j;
-import org.kanyakumari.dao.entity.onetoone.Answer;
-import org.kanyakumari.dao.entity.onetoone.Question;
-import org.kanyakumari.dao.repository.onetoone.AnswerRepository;
-import org.kanyakumari.dao.repository.onetoone.QuestionRepository;
+import org.kanyakumari.dao.entity.onetoone.Laptop;
+import org.kanyakumari.dao.entity.onetoone.Student;
+import org.kanyakumari.dao.repository.onetoone.LaptopRepository;
+import org.kanyakumari.dao.repository.onetoone.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,10 +15,10 @@ import java.util.Optional;
 public class OneToOneService {
 
     @Autowired
-    private QuestionRepository questionRepository;
+    private StudentRepository studentRepository;
 
     @Autowired
-    private AnswerRepository answerRepository;
+    private LaptopRepository laptopRepository;
 
     public void main() {
         test1();
@@ -27,34 +27,30 @@ public class OneToOneService {
     }
 
     private void test1() {
-        Answer ans1 = Answer.builder().answer("Second Ans").build();
-        Question qs1 = Question.builder().question("Second Quest").build();
+        Laptop laptop = Laptop.builder().laptopName("Laptop 1").build();
+        Student student = Student.builder().studentName("Student Name 1").build();
 
-        qs1.setAnswer(ans1);
-        answerRepository.save(ans1);
-        questionRepository.save(qs1);
-
-//        qs1.setAnswer(ans1);
-//        questionRepository.save(qs1);
-//        answerRepository.save(ans1);
+        laptopRepository.save(laptop);
+        student.setLaptop(laptop);
+        studentRepository.save(student);
     }
 
     private void doQuery() {
-        Optional<Question> qs1 = questionRepository.findById(1L);
+        Optional<Student> qs1 = studentRepository.findById(1L);
         if(qs1.isPresent()) {
-            System.out.println("QID : " + qs1.get().getId());
-            System.out.println("Question : " + qs1.get().getQuestion());
-            System.out.println("Answer: " + qs1.get().getAnswer().getAnswer());
+            System.out.println("Student Id : " + qs1.get().getId());
+            System.out.println("Student Name : " + qs1.get().getStudentName());
+            System.out.println("Laptop Name: " + qs1.get().getLaptop().getLaptopName());
         }
 
     }
 
     private void doQuery2() {
-        Optional<Answer> ans1 = answerRepository.findById(1L);
-        if(ans1.isPresent()) {
-            System.out.println("AnsID : " + ans1.get().getId());
-            System.out.println("Answer : " + ans1.get().getAnswer());
-            System.out.println("Question: " + ans1.get().getQuestion().getQuestion());
+        Optional<Laptop> laptop = laptopRepository.findById(1L);
+        if(laptop.isPresent()) {
+            System.out.println("Laptop ID : " + laptop.get().getId());
+            System.out.println("Laptop Name : " + laptop.get().getLaptopName());
+            System.out.println("Student Name: " + laptop.get().getStudent().getStudentName());
         }
     }
 
