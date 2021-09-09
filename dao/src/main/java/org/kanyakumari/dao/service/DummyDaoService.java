@@ -1,6 +1,7 @@
 package org.kanyakumari.dao.service;
 
 import lombok.extern.slf4j.Slf4j;
+import org.kanyakumari.dao.service.manytomany.ManyToManyService;
 import org.kanyakumari.dao.service.onetomany.OneToManyService;
 import org.kanyakumari.dao.service.onetoone.OneToOneService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,10 +17,15 @@ public class DummyDaoService {
     @Autowired
     private OneToManyService oneToManyService;
 
+    @Autowired
+    private ManyToManyService manyToManyService;
+
+
 
     public void main() {
 //        oneToOneService.main();
-        oneToManyService.main();
+//        oneToManyService.main();
+        manyToManyService.main();
     }
 
 }
