@@ -1,8 +1,7 @@
 package org.kanyakumari.dao.service;
 
 import lombok.extern.slf4j.Slf4j;
-import org.kanyakumari.dao.entity.Test;
-import org.kanyakumari.dao.repository.TestRepository;
+import org.kanyakumari.dao.service.onetoone.OneToOneService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,21 +10,10 @@ import org.springframework.stereotype.Service;
 public class DummyDaoService {
 
     @Autowired
-    private TestRepository repository;
+    OneToOneService oneToOneService;
 
     public void main() {
-
+        oneToOneService.main();
     }
 
-    public void oneToOne() {
-
-    }
-
-    public void oneToOneBi() {
-
-    }
-
-    public void OneToMany() {
-
-    }
 }
