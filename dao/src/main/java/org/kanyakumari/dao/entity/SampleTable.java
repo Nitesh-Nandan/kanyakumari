@@ -14,12 +14,12 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "test")
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Test {
+@Table(name = "sample_table")
+public class SampleTable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
