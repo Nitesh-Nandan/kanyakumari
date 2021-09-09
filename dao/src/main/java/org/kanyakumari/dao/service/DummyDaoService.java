@@ -1,6 +1,7 @@
 package org.kanyakumari.dao.service;
 
 import lombok.extern.slf4j.Slf4j;
+import org.kanyakumari.dao.service.complex.ComplexMappingService;
 import org.kanyakumari.dao.service.manytomany.ManyToManyService;
 import org.kanyakumari.dao.service.onetomany.OneToManyService;
 import org.kanyakumari.dao.service.onetoone.OneToOneService;
@@ -20,12 +21,14 @@ public class DummyDaoService {
     @Autowired
     private ManyToManyService manyToManyService;
 
+    @Autowired
+    private ComplexMappingService complexMappingService;
 
 
     public void main() {
-//        oneToOneService.main();
-//        oneToManyService.main();
+        oneToOneService.main();
+        oneToManyService.main();
         manyToManyService.main();
+        complexMappingService.main();
     }
-
 }
