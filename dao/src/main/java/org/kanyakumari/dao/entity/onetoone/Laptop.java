@@ -28,7 +28,7 @@ public class Laptop {
     @Column(name = "laptop_name")
     private String laptopName;
 
-    // Bi-directional mapping, it says mapped by answer attribute of Question Entity
+    // Uni-directional mapping, it says mapped by answer attribute of Question Entity
     @OneToOne(mappedBy = "laptop")
     private Student student;
 

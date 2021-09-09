@@ -24,60 +24,56 @@ public class ManyToManyService {
     private ProjectRepository projectRepository;
 
     public void main() {
+        log.info("ManyToManyService Started ....................................");
         create();
-        doQuery();
-        doQuery2();
+        query();
+        query2();
+        log.info("ManyToManyService Finished ....................................");
     }
 
     private void create() {
 
-        Employee emp1 = Employee.builder().name("Nitesh").build();
-        Employee emp2 = Employee.builder().name("Nandan").build();
+        log.info("Create started ........................");
+
+        Employee emp1 = Employee.builder().name("Employee 1").build();
+        Employee emp2 = Employee.builder().name("Employee 2").build();
         employeeRepository.save(emp1);
         employeeRepository.save(emp2);
 
         Project p1 = Project.builder().name("Project 1").build();
         Project p2 = Project.builder().name("Project 2").build();
         Project p3 = Project.builder().name("Project 3").build();
-        Project p4 = Project.builder().name("Project 4").build();
         projectRepository.save(p1);
         projectRepository.save(p2);
         projectRepository.save(p3);
-        projectRepository.save(p4);
 
-        // employee 1 projects
+        // employee 1 projects (emp1 -> {p1, p2})
         List<Project> projects = new ArrayList<>();
-        projects.add(p1); projects.add(p2);
-//        projects.add(p3);
+        projects.add(p1);
+        projects.add(p2);
         emp1.setProjects(projects);
         employeeRepository.save(emp1);
 
 
-//        // employee 2 projects
-//        projects.clear();
-//        projects.add(p2);projects.add(p3);projects.add(p4);
-//        emp2.setProjects(projects);
-//        employeeRepository.save(emp2);
-//
-//
-//       // adding employee to projects
-//        Employee emp3 = Employee.builder().name("John").build();
-//        Employee emp4 = Employee.builder().name("John").build();
-//        employeeRepository.save(emp3);
-//        employeeRepository.save(emp4);
-//        Project p5 = Project.builder().name("Project 5").build();
-//        projectRepository.save(p5);
-//        List<Employee> empList = new ArrayList<>();
-//        empList.add(emp3); empList.add(emp4);
-//        p5.setEmployees(empList);
-//        projectRepository.save(p5);
+        // project 3 to employees (p3 -> {emp3, emp4})
+        Employee emp3 = Employee.builder().name("Employee 3").build();
+        Employee emp4 = Employee.builder().name("Employee 4").build();
+        employeeRepository.save(emp3);
+        employeeRepository.save(emp4);
+        List<Employee> empList = new ArrayList<>();
+        empList.add(emp3);
+        empList.add(emp4);
+        p3.setEmployees(empList);
+        projectRepository.save(p3);
+
+        log.info("Create Finished ........................");
     }
 
-    private void doQuery(){
+    private void query() {
 
     }
 
-    private void doQuery2() {
+    private void query2() {
 
     }
 }

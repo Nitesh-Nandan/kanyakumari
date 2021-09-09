@@ -1,5 +1,6 @@
 package org.kanyakumari.dao.service.complex;
 
+import lombok.extern.slf4j.Slf4j;
 import org.kanyakumari.dao.entity.complex.ReferralMapping;
 import org.kanyakumari.dao.entity.complex.ReferralUser;
 import org.kanyakumari.dao.repository.complex.ReferralMappingRepository;
@@ -11,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+@Slf4j
 @Service
 public class ComplexMappingService {
 
@@ -28,6 +30,8 @@ public class ComplexMappingService {
     }
 
     private void create() {
+        log.info("Create started ............................");
+
         ReferralUser r1 = ReferralUser.builder().name("Nitesh").build();
         ReferralUser r2 = ReferralUser.builder().name("Raju").build();
         ReferralUser r3 = ReferralUser.builder().name("Rahul").build();
@@ -37,33 +41,37 @@ public class ComplexMappingService {
         referralUserRepository.save(r3);
 
         List<ReferralUser> referralUsers = new ArrayList<>();
-        referralUsers.add(r2); referralUsers.add(r3);
+        referralUsers.add(r2);
+        referralUsers.add(r3);
         r1.setReferralUser(referralUsers);
 
         referralUserRepository.save(r1);
+
+        log.info("Create Finished ............................");
     }
 
     private void query() {
 
-        System.out.println("Query 1....................");
+        log.info("Query 1....................");
 
-       Optional<ReferralUser> optionalUser = referralUserRepository.findById(1L);
-       if(optionalUser.isPresent()) {
-           ReferralUser referralUser = optionalUser.get();
-           System.out.println("Id: " + referralUser.getId());
-           System.out.println("Name: " + referralUser.getName());
-           List<ReferralUser> referred = referralUser.getReferralUser();
-           System.out.println("Referred user .................");
-           referred.stream().forEach(ele-> System.out.println("User: " + ele.getName()));
+        Optional<ReferralUser> optionalUser = referralUserRepository.findById(1L);
+        if (optionalUser.isPresent()) {
+            ReferralUser referralUser = optionalUser.get();
+            System.out.println("Id: " + referralUser.getId());
+            System.out.println("Name: " + referralUser.getName());
+            List<ReferralUser> referred = referralUser.getReferralUser();
+            System.out.println("Referred user .................");
+            referred.stream().forEach(ele -> System.out.println("User: " + ele.getName()));
 
-       }
+        }
 
     }
 
     private void query2() {
-        System.out.println("Query 2....................");
+        log.info("Query 2....................");
+
         Optional<ReferralMapping> mapping = referralMappingRepository.findById(2L);
-        if(mapping.isPresent()) {
+        if (mapping.isPresent()) {
             System.out.println("Id: " + mapping.get().getId());
             System.out.println("Refree: " + mapping.get().getRefreeUser());
             System.out.println("Referral: " + mapping.get().getReferredUser());
@@ -72,7 +80,8 @@ public class ComplexMappingService {
     }
 
     private void query3() {
-        System.out.println("Query 3....................");
+        log.info("Query 3....................");
+
         List<ReferralMapping> lists = referralMappingRepository.getByRefreeId(1L);
         lists.stream().forEach(et -> {
             System.out.println("Id: " + et.getId());

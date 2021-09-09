@@ -23,34 +23,44 @@ public class OneToManyService {
     private AnswerRepository answerRepository;
 
     public void main() {
+        log.info("OneToManyService Started ....................................");
         create();
-        doQuery();
-        doQuery2();
+        query();
+        query2();
+
+        log.info("OneToManyService Finished ....................................");
     }
 
     private void create() {
+        log.info("Created started ...............");
+
         List<Answer> answers = new ArrayList<>();
-        for(int i = 0; i<5;i++) {
-            answers.add(Answer.builder().answer("My Answer" + i ).build());
+        for (int i = 0; i < 5; i++) {
+            answers.add(Answer.builder().answer("My Answer" + i).build());
         }
         answerRepository.saveAll(answers);
+
         Question q1 = Question.builder().question("Question 1").build();
+        questionRepository.save(q1);
         q1.setAnswers(answers);
         questionRepository.save(q1);
+
+
         Question q2 = Question.builder().question("Question 2").build();
         questionRepository.save(q2);
-
         Answer ans = Answer.builder().answer("Custom Answer").build();
         ans.setQuestion(q2);
         answerRepository.save(ans);
+
+        log.info("Created Finished ...............");
     }
 
-    private void doQuery() {
+    private void query() {
 
         log.info("Question Query ............");
 
         Optional<Question> obj = questionRepository.findById(1L);
-        if(obj.isPresent()) {
+        if (obj.isPresent()) {
             System.out.println("Question Id: " + obj.get().getId());
             System.out.println("Question String: " + obj.get().getQuestion());
             System.out.println("Answer are: ");
@@ -60,11 +70,11 @@ public class OneToManyService {
 
     }
 
-    private void doQuery2() {
+    private void query2() {
         log.info("Answer Query ............");
 
         Optional<Answer> obj = answerRepository.findById(6L);
-        if(obj.isPresent()) {
+        if (obj.isPresent()) {
             System.out.println("Answer Id: " + obj.get().getId());
             System.out.println("Answer String: " + obj.get().getAnswer());
             System.out.println("Question is: " + obj.get().getQuestion());
