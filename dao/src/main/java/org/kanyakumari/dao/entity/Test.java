@@ -21,7 +21,7 @@ import javax.persistence.Table;
 @AllArgsConstructor
 public class Test {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "name")

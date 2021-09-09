@@ -18,7 +18,7 @@ public class Health {
 
     @GetMapping("/health")
     public ResponseEntity<String> healthCheck() {
-        dummyDaoService.create();
-        return ResponseEntity.ok(value);
+        dummyDaoService.main();
+        return ResponseEntity.ok("Success");
     }
 }
